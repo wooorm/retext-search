@@ -1,0 +1,19 @@
+{
+  "name": "retext-search",
+  "repository": "wooorm/retext-search",
+  "description": "Search in a TextOM tree with Retext",
+  "version": "0.0.1",
+  "keywords": [
+    "search",
+    "retext"
+  ],
+  "dependencies": {
+    "wooorm/retext-double-metaphone": "0.0.3",
+    "wooorm/retext-porter-stemmer": "0.0.7",
+    "wooorm/retext-visit": "0.0.5"
+  },
+  "scripts" : [
+    "index.js"
+  ],
+  "license": "MIT"
+}
