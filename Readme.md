@@ -95,6 +95,7 @@ root.searchAll('xavier clair');
 ## Benchmark
 
 On a MacBook Air.
+
 P.S. the tests might stack-overflow on you—its _that_ fast.
 
 ```
