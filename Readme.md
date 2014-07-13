@@ -33,8 +33,8 @@ var root = new Retext()
 
         '\n\n' +
 
-        'Ms. Clare likes her tea with milk, while sugar is prefered by ' +
-        'Mr. Smith.' +
+        'Ms Clare likes her tea with milk, while sugar is prefered by ' +
+        'Mr Smith. ' +
         'Xavier likes rowing in the morning.'
     );
 
@@ -99,11 +99,11 @@ On a MacBook Air.
 P.S. the tests might stack-overflow on you—its _that_ fast.
 
 ```
-           Searching in lipsum for "Lorem", "etiam", and "ferment"
-2,428 op/s » tiny (1 paragraph, 5 sentences, 30 words, 208 B)
-4,832 op/s » small (10 paragraphs, 50 sentences, 300 words, 2 kB)
-5,133 op/s » medium (100 paragraphs, 500 sentences, 3000 words, 21 kB)
-4,861 op/s » large (1000 paragraphs, 5000 sentences, 30000 words, 208 kB)
+             Searching in lipsum for "Lorem"
+  4,515 op/s » tiny (1 paragraph, 5 sentences, 30 words, 208 B)
+    591 op/s » small (10 paragraphs, 50 sentences, 300 words, 2 kB)
+     62 op/s » medium (100 paragraphs, 500 sentences, 3000 words, 21 kB)
+      6 op/s » large (1000 paragraphs, 5000 sentences, 30000 words, 208 kB)
 ```
 
 Note: Run the benchmarks yourself with `npm run benchmark`
