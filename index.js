@@ -23,39 +23,41 @@ function test(queries, node) {
     return false;
 }
 
-function search(values) {
-    var self = this,
-        query = [],
-        result = [];
+function searchFactory(retext) {
+    return function (values) {
+        var self = this,
+            query = [],
+            result = [];
 
-    if (values) {
-        values = String(values);
-    }
+        if (values) {
+            values = String(values);
+        }
 
-    if (!values || !values.length) {
-        return result;
-    }
+        if (!values || !values.length) {
+            return result;
+        }
 
-    self
-        .parser(values)
-        .visitType(self.WORD_NODE, function (node) {
-            query.push(node.data.stemmedPhonetics);
+        retext
+            .parse(values)
+            .visitType(self.WORD_NODE, function (node) {
+                query.push(node.data.stemmedPhonetics);
+            });
+
+        if (!query.length) {
+            throw new TypeError(
+                'TypeError: "' + values + '" is not a valid argument ' +
+                'for Parent#search()'
+            );
+        }
+
+        self.visitType(self.WORD_NODE, function (node) {
+            if (test(query, node)) {
+                result.push(node);
+            }
         });
 
-    if (!query.length) {
-        throw new TypeError(
-            'TypeError: "' + values + '" is not a valid argument ' +
-            'for Parent#search()'
-        );
-    }
-
-    self.visitType(self.WORD_NODE, function (node) {
-        if (test(query, node)) {
-            result.push(node);
-        }
-    });
-
-    return result;
+        return result;
+    };
 }
 
 function flattenParents(matches) {
@@ -112,7 +114,7 @@ function attach(retext) {
         .use(stemmer)
         .use(visit);
 
-    parentPrototype.search = elementPrototype.search = search;
+    parentPrototype.search = elementPrototype.search = searchFactory(retext);
     parentPrototype.searchAll = elementPrototype.searchAll = searchAll;
 }
 
