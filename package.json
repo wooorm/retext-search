@@ -9,17 +9,17 @@
   "author": "Titus Wormer <tituswormer@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "retext-double-metaphone": "0.0.3",
-    "retext-porter-stemmer": "0.0.7",
-    "retext-visit": "0.0.5"
+    "retext-double-metaphone": "^0.1.0",
+    "retext-porter-stemmer": "^0.1.0",
+    "retext-visit": "^0.1.0"
   },
   "devDependencies": {
-    "eslint": "^0.6.2",
-    "istanbul": "~0.2.11",
+    "eslint": "^0.7.4",
+    "istanbul": "^0.3.0",
     "jscs": "^1.5.4",
     "matcha": "^0.5.0",
     "mocha": "~1.20.1",
-    "retext": "~0.0.12"
+    "retext": "^0.1.0-rc.4"
   },
   "repository": {
     "type": "git",
