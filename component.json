@@ -2,7 +2,7 @@
   "name": "retext-search",
   "repository": "wooorm/retext-search",
   "description": "Search in a TextOM tree with Retext",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": [
     "search",
     "retext"
