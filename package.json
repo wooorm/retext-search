@@ -14,7 +14,6 @@
     "retext-visit": "0.0.5"
   },
   "devDependencies": {
-    "browserify": "^4.1.11",
     "eslint": "^0.6.2",
     "istanbul": "~0.2.11",
     "jscs": "^1.5.4",
@@ -35,10 +34,10 @@
     "lint-style": "node_modules/.bin/jscs index.js spec/retext-search.spec.js benchmark/index.js --reporter=inline",
     "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global suite,set,bench --rule 'quotes: [2, single]'",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/retext-search.spec.js",
-    "prepublish": "npm run build-browser",
-    "build-browser": "node_modules/.bin/browserify spec/retext-search.spec.js -o spec/browser.spec.js",
+    "install-browser-test": "npm install browserify",
+    "build-browser-test": "node_modules/.bin/browserify spec/retext-search.spec.js -o spec/browser.spec.js",
     "benchmark" : "node_modules/.bin/matcha",
-    "make": "npm run build-browser && npm run lint && npm run coverage"
+    "make": "npm run lint && npm run coverage"
   },
   "testling": {
     "files": "spec/retext-search.spec.js",
