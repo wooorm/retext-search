@@ -14,8 +14,8 @@ tree = new Retext()
 
         '\n\n' +
 
-        'Ms. Clare likes her tea with milk, while sugar is prefered by ' +
-        'Mr. Smith.' +
+        'Ms Clare likes her tea with milk, while sugar is prefered by ' +
+        'Mr Smith. ' +
         'Xavier likes rowing in the morning.'
     );
 
@@ -78,7 +78,7 @@ describe('TextOM.Parent#search(values)', function () {
     it('should return different matched words', function () {
         var matches = tree.search('xavier clair');
         assert(matches[0] === tree.head.head.head);
-        assert(matches[1] === tree.tail.head[3]);
+        assert(matches[1] === tree.tail.head[2]);
         assert(matches[2] === tree.tail.tail.head);
         assert(matches.length === 3);
     });
@@ -151,7 +151,7 @@ describe('TextOM.Parent#searchAll(values)', function () {
         assert(matches[1].matches[0].node === tree.tail.head);
         assert(matches[1].matches[1].node === tree.tail.tail);
         assert(matches[1].matches.length === 2);
-        assert(matches[1].matches[0].matches[0] === tree.tail.head[3]);
+        assert(matches[1].matches[0].matches[0] === tree.tail.head[2]);
         assert(matches[1].matches[0].matches.length === 1);
         assert(matches[1].matches[1].matches[0] === tree.tail.tail.head);
         assert(matches[1].matches[1].matches.length === 1);
