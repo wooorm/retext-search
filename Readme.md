@@ -1,9 +1,5 @@
 # retext-search [![Build Status](https://travis-ci.org/wooorm/retext-search.svg?branch=master)](https://travis-ci.org/wooorm/retext-search) [![Coverage Status](https://img.shields.io/coveralls/wooorm/retext-search.svg)](https://coveralls.io/r/wooorm/retext-search?branch=master)
 
-[![browser support](https://ci.testling.com/wooorm/retext-search.png) ](https://ci.testling.com/wooorm/retext-search)
-
----
-
 Search in a TextOM tree with **[Retext](https://github.com/wooorm/retext)**.
 
 ## Installation
