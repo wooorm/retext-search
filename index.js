@@ -1,20 +1,43 @@
 'use strict';
 
-var stemmer = require('retext-porter-stemmer'),
-    doubleMetaphone = require('retext-double-metaphone'),
-    visit = require('retext-visit');
+/**
+ * Dependencies.
+ */
 
-exports = module.exports = function () {};
+var stemmer,
+    doubleMetaphone,
+    visit,
+    content;
+
+stemmer = require('retext-porter-stemmer');
+doubleMetaphone = require('retext-double-metaphone');
+visit = require('retext-visit');
+content = require('retext-content');
+
+/**
+ * Test if `node` matches a query.
+ *
+ * @param {Array.<{0: string, 1: string}>} - queries
+ * @param {WordNode} node
+ * @return {boolean}
+ */
 
 function test(queries, node) {
-    var iterator = -1,
-        phonetics = node.data.stemmedPhonetics,
+    var index,
+        phonetics,
         query;
 
-    while (query = queries[++iterator]) {
+    index = queries.length;
+    phonetics = node.data.stemmedPhonetics;
+
+    while (index--) {
+        query = queries[index];
+
         if (
-            phonetics[0] === query[0] || phonetics[1] === query[0] ||
-            phonetics[0] === query[1] || phonetics[1] === query[1]
+            phonetics[0] === query[0] ||
+            phonetics[1] === query[0] ||
+            phonetics[0] === query[1] ||
+            phonetics[1] === query[1]
         ) {
             return true;
         }
@@ -23,99 +46,191 @@ function test(queries, node) {
     return false;
 }
 
-function searchFactory(retext) {
-    return function (values) {
-        var self = this,
-            query = [],
-            result = [];
+/**
+ * Find words in `node` matching `values`.
+ *
+ * @param {string} values
+ * @this {Parent}
+ * @return {Array.<WordNode>}
+ */
 
-        if (values) {
-            values = String(values);
-        }
+function search(values) {
+    var self,
+        words,
+        query,
+        result;
 
-        if (!values || !values.length) {
-            return result;
-        }
+    self = this;
 
-        retext
-            .parse(values)
-            .visitType(self.WORD_NODE, function (node) {
-                query.push(node.data.stemmedPhonetics);
-            });
+    result = [];
 
-        if (!query.length) {
-            throw new TypeError(
-                'TypeError: "' + values + '" is not a valid argument ' +
-                'for Parent#search()'
-            );
-        }
+    if (values) {
+        values = String(values);
+    }
 
-        self.visitType(self.WORD_NODE, function (node) {
-            if (test(query, node)) {
-                result.push(node);
-            }
-        });
-
+    if (!values || !values.length) {
         return result;
-    };
+    }
+
+    query = [];
+
+    /**
+     * Get the stems from the query.
+     */
+
+    words = new self.TextOM.SentenceNode();
+    words.replaceContent(values);
+
+    words.visitType(self.WORD_NODE, function (node) {
+        query.push(node.data.stemmedPhonetics);
+    });
+
+    if (!query.length) {
+        throw new TypeError(
+            'TypeError: `' + values + '` is not a valid argument ' +
+            'for Parent#search(values)'
+        );
+    }
+
+    /**
+     * Find the query in `self`.
+     */
+
+    self.visitType(self.WORD_NODE, function (node) {
+        if (test(query, node)) {
+            result.push(node);
+        }
+    });
+
+    return result;
 }
 
+/**
+ * Find the parents belonging to the nodes in
+ * `matches`.
+ *
+ * @param {Array.<Node>} matches
+ * @return {Object.<{matches: Array.<Node>, node: Parent}>}
+ */
+
 function flattenParents(matches) {
-    var parents = [],
-        scores = [],
-        parentToScoreMap = [],
-        iterator = -1,
-        child, parent, index, score;
+    var parents,
+        scores,
+        parentToScoreMap,
+        index,
+        length,
+        child,
+        parent,
+        position,
+        score;
 
-    while (child = matches[++iterator]) {
+    parents = [];
+    scores = [];
+    parentToScoreMap = [];
+
+    index = -1;
+    length = matches.length;
+
+    while (++index < length) {
+        child = matches[index];
+
         parent = (child.node || child).parent;
-        index = parents.indexOf(parent);
-        parents[iterator] = parent;
 
-        if (index !== -1) {
-            score = scores[parentToScoreMap[index]];
-        } else {
-            index = scores.length;
-            score = scores[index] = {
+        position = parents.indexOf(parent);
+
+        parents[index] = parent;
+
+        if (position === -1) {
+            position = scores.length;
+
+            score = scores[position] = {
                 'matches' : [],
                 'node' : parent
             };
+        } else {
+            score = scores[parentToScoreMap[position]];
         }
 
-        parentToScoreMap[iterator] = index;
+        parentToScoreMap[index] = position;
+
         score.matches.push(child);
     }
 
     return scores;
 }
 
+/**
+ * Find parents in `node` matching `values`.
+ *
+ * @param {string} values
+ * @this {Parent}
+ * @return {Array.<{node: Node, matches: Array}>}
+ */
+
 function searchAll(values) {
-    var self = this,
-        nodes = self.search(values);
+    var self,
+        nodes;
+
+    self = this;
+    nodes = self.search(values);
 
     if (!nodes || !nodes.length) {
         return nodes;
     }
 
+    /**
+     * Keep op flattening the results object until
+     * self is reached.
+     */
+
     while (nodes[0].node !== self) {
         nodes = flattenParents(nodes);
     }
 
+    /**
+     * Return the matches of `self`.
+     */
+
     return nodes[0].matches;
 }
 
+/**
+ * Define `retextSearch`.
+ */
+
+function retextSearch() {}
+
+/**
+ * Define `attach`.
+ */
+
 function attach(retext) {
-    var TextOM = retext.parser.TextOM,
-        parentPrototype = TextOM.Parent.prototype,
-        elementPrototype = TextOM.Element.prototype;
+    var TextOM,
+        parentPrototype,
+        elementPrototype;
+
+    TextOM = retext.TextOM;
+    parentPrototype = TextOM.Parent.prototype;
+    elementPrototype = TextOM.Element.prototype;
 
     retext
         .use(doubleMetaphone)
+        .use(content)
         .use(stemmer)
         .use(visit);
 
-    parentPrototype.search = elementPrototype.search = searchFactory(retext);
+    parentPrototype.search = elementPrototype.search = search;
     parentPrototype.searchAll = elementPrototype.searchAll = searchAll;
 }
 
-exports.attach = attach;
+/**
+ * Expose `attach`.
+ */
+
+retextSearch.attach = attach;
+
+/**
+ * Expose `retextSearch`.
+ */
+
+module.exports = retextSearch;
