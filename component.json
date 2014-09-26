@@ -1,8 +1,8 @@
 {
   "name": "retext-search",
-  "repository": "wooorm/retext-search",
-  "description": "Search in a TextOM tree with Retext",
   "version": "0.1.0",
+  "description": "Search in a TextOM tree with Retext",
+  "license": "MIT",
   "keywords": [
     "search",
     "retext"
@@ -13,8 +13,8 @@
     "wooorm/retext-visit": "^0.1.1"
     "wooorm/retext-content": "^0.2.2"
   },
+  "repository": "wooorm/retext-search",
   "scripts" : [
     "index.js"
-  ],
-  "license": "MIT"
+  ]
 }

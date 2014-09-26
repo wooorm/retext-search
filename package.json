@@ -2,18 +2,22 @@
   "name": "retext-search",
   "version": "0.1.0",
   "description": "Search in a TextOM tree with Retext",
+  "license": "MIT",
   "keywords": [
     "search",
     "retext"
   ],
-  "author": "Titus Wormer <tituswormer@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "retext-content": "^0.2.2",
     "retext-double-metaphone": "^0.1.1",
     "retext-porter-stemmer": "^0.1.1",
     "retext-visit": "^0.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/retext-search.git"
+  },
+  "author": "Titus Wormer <tituswormer@gmail.com>",
   "devDependencies": {
     "eslint": "^0.8.0",
     "istanbul": "^0.3.0",
@@ -21,10 +25,6 @@
     "matcha": "^0.5.0",
     "mocha": "^1.21.0",
     "retext": "^0.2.0-rc.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/retext-search.git"
   },
   "scripts": {
     "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/retext-search.spec.js",
