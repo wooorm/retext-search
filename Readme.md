@@ -24,52 +24,50 @@ $ bower install retext-search
 ```js
 var Retext = require('retext'),
     search = require('retext-search'),
-    root;
+    retext;
 
-var root = new Retext()
-    .use(search)
-    .parse(
-        'Clair wants to drink milk after her morning run. ' +
-        'Schmidt likes coffee in the morning, when reading a book.' +
+retext = new Retext().use(search);
 
-        '\n\n' +
+retext.parse(
+    'Clair wants to drink milk after her morning run. ' +
+    'Schmidt likes coffee in the morning, when reading a book.' +
 
-        'Ms Clare likes her tea with milk, while sugar is prefered by ' +
-        'Mr Smith. ' +
-        'Xavier likes rowing in the morning.'
-    );
+    '\n\n' +
 
-root.search('smit');
-/*
- * [
- *   Schmidt, // The WordNode in the second sentence
- *   Smith // The WordNode in the penultimate sentence
- * ]
-*/
+    'Ms Clare likes her tea with milk, while sugar is prefered by ' +
+    'Mr Smith. ' +
+    'Xavier likes rowing in the morning.',
+    function (err, tree) {
+        tree.search('smit');
+        /**
+         * [
+         *   Schmidt, // The `WordNode` in the second sentence
+         *   Smith // The `WordNode` in the penultimate sentence
+         * ]
+         */
+    }
+);
 ```
 
 ## API
-retext-search depends on the following plugins:
-
-- [retext-double-metaphone](https://github.com/wooorm/retext-double-metaphone) — for phonetics;
-- [retext-porter-stemmer](https://github.com/wooorm/retext-porter-stemmer) — for stemming;
-- [retext-visit](https://github.com/wooorm/retext-visit)
 
 ### Parent#search(query)
-Searches the parent for query and returns an array containing all `WordNode`s matching the given query.
+
+Searches the node for query and returns an array containing all `WordNode`s matching the given query.
 
 ```js
-root.search('test'); // [];
-root.search('xavier clair'); // [Clair, Clare, Xavier];
-root.search(['milk']); // [milk, milk];
+tree.search('test'); // [];
+tree.search('xavier clair'); // [Clair, Clare, Xavier];
+tree.search(['milk']); // [milk, milk];
 ```
 
 ### Parent#searchAll(query)
-Searches the parent for query for all `WordNode`s matching the given query, returns a tree containing every matched parent.
+
+Searches the node for all `WordNode`s matching the given query, returns a tree containing every matched parent.
 
 ```js
-root.searchAll('test'); // null
-root.searchAll('xavier clair');
+tree.searchAll('test'); // null
+tree.searchAll('xavier clair');
 /* ├─ 0:
  * |  ├─ node: ParagraphNode
  * |  └─ matches:
@@ -95,20 +93,21 @@ root.searchAll('xavier clair');
 
 ## Benchmark
 
-On a MacBook Air.
-
-P.S. the tests might stack-overflow on you—its _that_ fast.
+Run the benchmarks yourself with `npm run benchmark`
 
 ```
-             Searching in lipsum for "Lorem"
-  4,515 op/s » tiny (1 paragraph, 5 sentences, 30 words, 208 B)
-    591 op/s » small (10 paragraphs, 50 sentences, 300 words, 2 kB)
-     62 op/s » medium (100 paragraphs, 500 sentences, 3000 words, 21 kB)
-      6 op/s » large (1000 paragraphs, 5000 sentences, 30000 words, 208 kB)
+             A section (10 paragraphs, 50 sentences, 300 words)
+  4,395 op/s » Searching in lipsum for "Lorem"
+  4,423 op/s » Searching parents in lipsum for "Lorem"
+
+             An article (100 paragraphs, 500 sentences, 3,000 words)
+    530 op/s » Searching in lipsum for "Lorem"
+    531 op/s » Searching parents in lipsum for "Lorem"
+
+             A book (1,000 paragraphs, 5,000 sentences, 30,000 words)
+     63 op/s » Searching in lipsum for "Lorem"
+     34 op/s » Searching parents in lipsum for "Lorem"
 ```
-
-Note: Run the benchmarks yourself with `npm run benchmark`
-
 
 ## License
 
