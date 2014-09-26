@@ -107,4 +107,4 @@ Note: Run the benchmarks yourself with `npm run benchmark`
 
 ## License
 
-  MIT
+MIT © Titus Wormer
