@@ -4,14 +4,19 @@ Search in a TextOM tree with **[Retext](https://github.com/wooorm/retext)**.
 
 ## Installation
 
-NPM:
+npm:
 ```sh
 $ npm install retext-search
 ```
 
-Component.js:
+Component:
 ```sh
 $ component install wooorm/retext-search
+```
+
+Bower:
+```sh
+$ bower install retext-search
 ```
 
 ## Usage
