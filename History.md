@@ -1,5 +1,5 @@
 
-n.n.n / 2014-09-27
+0.2.1 / 2014-09-27
 ==================
 
  * Add missing comma in component.json
