@@ -8,7 +8,7 @@ var search,
     Retext,
     assert;
 
-search = require('..');
+search = require('./');
 Retext = require('retext');
 assert = require('assert');
 
