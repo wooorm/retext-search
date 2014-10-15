@@ -7,7 +7,7 @@
 var search,
     Retext;
 
-search = require('..');
+search = require('./');
 Retext = require('retext');
 
 /**
