@@ -8,10 +8,10 @@
     "retext"
   ],
   "dependencies": {
-    "retext-content": "^0.2.2",
-    "retext-double-metaphone": "^0.1.1",
-    "retext-porter-stemmer": "^0.1.1",
-    "retext-visit": "^0.1.1"
+    "retext-content": "^0.2.3",
+    "retext-double-metaphone": "^0.1.2",
+    "retext-porter-stemmer": "^0.2.0",
+    "retext-visit": "^0.2.0"
   },
   "repository": {
     "type": "git",
