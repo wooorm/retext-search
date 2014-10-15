@@ -1,6 +1,6 @@
 {
   "name": "retext-search",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Search in a TextOM tree with Retext",
   "license": "MIT",
   "keywords": [
