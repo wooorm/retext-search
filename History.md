@@ -1,4 +1,13 @@
 
+n.n.n / 2014-10-15
+==================
+
+ * Update API for changes in retext-visit
+ * Move `benchmark/` to `benchmark.js`
+ * Update dependencies
+ * Update .gitignore, .npmignore, bower ignore
+ * Move spec to test.js
+
 0.2.1 / 2014-09-27
 ==================
 
