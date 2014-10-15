@@ -81,7 +81,7 @@ function search(values) {
     words = new self.TextOM.SentenceNode();
     words.replaceContent(values);
 
-    words.visitType(self.WORD_NODE, function (node) {
+    words.visit(self.WORD_NODE, function (node) {
         query.push(node.data.stemmedPhonetics);
     });
 
@@ -96,7 +96,7 @@ function search(values) {
      * Find the query in `self`.
      */
 
-    self.visitType(self.WORD_NODE, function (node) {
+    self.visit(self.WORD_NODE, function (node) {
         if (test(query, node)) {
             result.push(node);
         }
