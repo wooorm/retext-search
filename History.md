@@ -1,4 +1,12 @@
 
+n.n.n / 2014-10-28
+==================
+
+ * Add `.eslintrc`
+ * Refactor to disallow space after object keys
+ * Refactor for changes in retext
+ * Update eslint, mocha, retext, retext-content, retext-double-metaphone, retext-porter-stemmer, retext-visit
+
 0.2.3 / 2014-10-21
 ==================
 
