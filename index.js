@@ -198,13 +198,7 @@ function searchAll(values) {
  * Define `retextSearch`.
  */
 
-function retextSearch() {}
-
-/**
- * Define `attach`.
- */
-
-function attach(retext) {
+function retextSearch(retext) {
     var TextOM,
         parentPrototype,
         elementPrototype;
@@ -222,12 +216,6 @@ function attach(retext) {
     parentPrototype.search = elementPrototype.search = search;
     parentPrototype.searchAll = elementPrototype.searchAll = searchAll;
 }
-
-/**
- * Expose `attach`.
- */
-
-retextSearch.attach = attach;
 
 /**
  * Expose `retextSearch`.

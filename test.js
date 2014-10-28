@@ -45,10 +45,6 @@ describe('retext-search()', function () {
     it('should be a `function`', function () {
         assert(typeof search === 'function');
     });
-
-    it('should export an `attach` method', function () {
-        assert(typeof search.attach === 'function');
-    });
 });
 
 describe('Parent#search(values)', function () {
