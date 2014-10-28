@@ -144,8 +144,8 @@ function flattenParents(matches) {
             position = scores.length;
 
             score = scores[position] = {
-                'matches' : [],
-                'node' : parent
+                'matches': [],
+                'node': parent
             };
         } else {
             score = scores[parentToScoreMap[position]];
