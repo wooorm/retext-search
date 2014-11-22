@@ -4,12 +4,14 @@
  * Dependencies.
  */
 
-var search,
-    Retext,
+var Retext,
+    search,
+    inspect,
     assert;
 
 search = require('./');
 Retext = require('retext');
+inspect = require('retext-inspect');
 assert = require('assert');
 
 /**
@@ -33,7 +35,9 @@ value =
 var retext,
     TextOM;
 
-retext = new Retext().use(search);
+retext = new Retext()
+    .use(inspect)
+    .use(search);
 
 TextOM = retext.TextOM;
 
