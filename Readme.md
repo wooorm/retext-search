@@ -22,11 +22,13 @@ $ bower install retext-search
 ## Usage
 
 ```js
-var Retext = require('retext'),
-    search = require('retext-search'),
-    retext;
+var Retext = require('retext');
+var search = require('retext-search');
+var inspect = require('retext-inspect');
 
-retext = new Retext().use(search);
+var retext = new Retext()
+    .use(inspect)
+    .use(search);
 
 retext.parse(
     'Clair wants to drink milk after her morning run. ' +
@@ -38,11 +40,16 @@ retext.parse(
     'Mr Smith. ' +
     'Xavier likes rowing in the morning.',
     function (err, tree) {
-        tree.search('smit');
+        console.log(tree.search('smit'));
         /**
          * [
-         *   Schmidt, // The `WordNode` in the second sentence
-         *   Smith // The `WordNode` in the penultimate sentence
+         *   // The `WordNode` in the second sentence:
+         *   WordNode[1]
+         *   └─ TextNode: 'Schmidt',
+         *
+         *   // The `WordNode` in the penultimate sentence
+         *   WordNode[1]
+         *   └─ TextNode: 'Smith'
          * ]
          */
     }
@@ -97,16 +104,16 @@ Run the benchmarks yourself with `npm run benchmark`
 
 ```
              A section (10 paragraphs, 50 sentences, 300 words)
-  4,395 op/s » Searching in lipsum for "Lorem"
-  4,423 op/s » Searching parents in lipsum for "Lorem"
+  4,056 op/s » Searching in lipsum for "Lorem"
+  4,111 op/s » Searching parents in lipsum for "Lorem"
 
              An article (100 paragraphs, 500 sentences, 3,000 words)
-    530 op/s » Searching in lipsum for "Lorem"
-    531 op/s » Searching parents in lipsum for "Lorem"
+    758 op/s » Searching in lipsum for "Lorem"
+    663 op/s » Searching parents in lipsum for "Lorem"
 
              A book (1,000 paragraphs, 5,000 sentences, 30,000 words)
-     63 op/s » Searching in lipsum for "Lorem"
-     34 op/s » Searching parents in lipsum for "Lorem"
+     81 op/s » Searching in lipsum for "Lorem"
+     37 op/s » Searching parents in lipsum for "Lorem"
 ```
 
 ## License
