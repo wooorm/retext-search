@@ -135,20 +135,20 @@ tree.searchAll('xavier clair');
 
 ## Benchmark
 
-Run the benchmarks yourself with `npm run benchmark`
+On a MacBook Air:
 
 ```
              A section (10 paragraphs, 50 sentences, 300 words)
-  4,056 op/s » Searching in lipsum for "Lorem"
-  4,111 op/s » Searching parents in lipsum for "Lorem"
+  4,560 op/s » Searching in lipsum for "Lorem"
+  5,044 op/s » Searching parents in lipsum for "Lorem"
 
              An article (100 paragraphs, 500 sentences, 3,000 words)
-    758 op/s » Searching in lipsum for "Lorem"
-    663 op/s » Searching parents in lipsum for "Lorem"
+    858 op/s » Searching in lipsum for "Lorem"
+    823 op/s » Searching parents in lipsum for "Lorem"
 
              A book (1,000 paragraphs, 5,000 sentences, 30,000 words)
-     81 op/s » Searching in lipsum for "Lorem"
-     37 op/s » Searching parents in lipsum for "Lorem"
+     88 op/s » Searching in lipsum for "Lorem"
+     65 op/s » Searching parents in lipsum for "Lorem"
 ```
 
 ## License
