@@ -1,6 +1,6 @@
 # retext-search [![Build Status](https://img.shields.io/travis/wooorm/retext-search.svg?style=flat)](https://travis-ci.org/wooorm/retext-search) [![Coverage Status](https://img.shields.io/coveralls/wooorm/retext-search.svg?style=flat)](https://coveralls.io/r/wooorm/retext-search?branch=master)
 
-Search in a TextOM tree with **[Retext](https://github.com/wooorm/retext)**.
+Search in a document with **[Retext](https://github.com/wooorm/retext)**.
 
 ## Installation
 
@@ -58,24 +58,59 @@ retext.parse(
 
 ## API
 
-### Parent#search(query)
+### [TextOM.Parent](https://github.com/wooorm/textom#textomparent-nlcstparent)#search(query)
 
-Searches the node for query and returns an array containing all `WordNode`s matching the given query.
+Search the operated on context for `query`.
+
+Parameters:
+
+- `query` (`string|array`): sentence containing words to search for.
+
+Returns: an array of [`WordNode`](https://github.com/wooorm/textom#textomwordnode-nlcstwordnode)s.
 
 ```js
-tree.search('test'); // [];
-tree.search('xavier clair'); // [Clair, Clare, Xavier];
-tree.search(['milk']); // [milk, milk];
+tree.search('test');
+// []
+
+tree.search('xavier clair');
+/*
+ * [
+ *   WordNode[1]
+ *   └─ TextNode: 'Clair',
+ *   WordNode[1]
+ *   └─ TextNode: 'Clare',
+ *   WordNode[1]
+ *   └─ TextNode: 'Xavier'
+ * ]
+ */
+
+tree.search(['milk']);
+/*
+ * [
+ *   WordNode[1]
+ *   └─ TextNode: 'milk',
+ *   WordNode[1]
+ *   └─ TextNode: 'milk'
+ * ]
+ */
 ```
 
-### Parent#searchAll(query)
+### [TextOM.Parent](https://github.com/wooorm/textom#textomparent-nlcstparent)#searchAll(query)
 
-Searches the node for all `WordNode`s matching the given query, returns a tree containing every matched parent.
+Search the operated on context for `query`. Useful for ranking sentences or paragraphs.
+
+Parameters:
+
+- `query` (`string|array`): sentence containing words to search for.
+
+Returns: an array of match objects. A match object contains a `node` property, and a `matches` array (containing match objects).
 
 ```js
 tree.searchAll('test'); // null
 tree.searchAll('xavier clair');
-/* ├─ 0:
+/*
+ * Array
+ * ├─ 0:
  * |  ├─ node: ParagraphNode
  * |  └─ matches:
  * |      └─ 0:
