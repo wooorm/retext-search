@@ -1,5 +1,5 @@
 
-n.n.n / 2014-12-14
+0.2.6 / 2014-12-14
 ==================
 
  * Update benchmark results in `Readme.md`
