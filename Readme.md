@@ -5,23 +5,26 @@ Search in a document with **[Retext](https://github.com/wooorm/retext)**.
 ## Installation
 
 npm:
-```sh
+
+```bash
 $ npm install retext-search
 ```
 
 Component:
-```sh
+
+```bash
 $ component install wooorm/retext-search
 ```
 
 Bower:
-```sh
+
+```bash
 $ bower install retext-search
 ```
 
 ## Usage
 
-```js
+```javascript
 var Retext = require('retext');
 var search = require('retext-search');
 var inspect = require('retext-inspect');
@@ -68,7 +71,7 @@ Parameters:
 
 Returns: an array of [`WordNode`](https://github.com/wooorm/textom#textomwordnode-nlcstwordnode)s.
 
-```js
+```javascript
 tree.search('test');
 // []
 
@@ -105,7 +108,7 @@ Parameters:
 
 Returns: an array of match objects. A match object contains a `node` property, and a `matches` array (containing match objects).
 
-```js
+```javascript
 tree.searchAll('test'); // null
 tree.searchAll('xavier clair');
 /*
@@ -129,15 +132,13 @@ tree.searchAll('xavier clair');
  *           └─ matches:
  *               └─ 0: WordNode: "Xavier"
  */
-
-
 ```
 
 ## Benchmark
 
 On a MacBook Air:
 
-```
+```text
              A section (10 paragraphs, 50 sentences, 300 words)
   4,560 op/s » Searching in lipsum for "Lorem"
   5,044 op/s » Searching parents in lipsum for "Lorem"
