@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -17,11 +17,10 @@ content = require('retext-content');
 /**
  * Test if `node` matches a query.
  *
- * @param {Array.<{0: string, 1: string}>} - queries
+ * @param {Array.<{0: string, 1: string}>} queries
  * @param {WordNode} node
  * @return {boolean}
  */
-
 function test(queries, node) {
     var index,
         phonetics,
@@ -53,7 +52,6 @@ function test(queries, node) {
  * @this {Parent}
  * @return {Array.<WordNode>}
  */
-
 function search(values) {
     var self,
         words,
@@ -74,7 +72,7 @@ function search(values) {
 
     query = [];
 
-    /**
+    /*
      * Get the stems from the query.
      */
 
@@ -92,7 +90,7 @@ function search(values) {
         );
     }
 
-    /**
+    /*
      * Find the query in `self`.
      */
 
@@ -112,7 +110,6 @@ function search(values) {
  * @param {Array.<Node>} matches
  * @return {Object.<{matches: Array.<Node>, node: Parent}>}
  */
-
 function flattenParents(matches) {
     var parents,
         scores,
@@ -166,7 +163,6 @@ function flattenParents(matches) {
  * @this {Parent}
  * @return {Array.<{node: Node, matches: Array}>}
  */
-
 function searchAll(values) {
     var self,
         nodes;
@@ -178,7 +174,7 @@ function searchAll(values) {
         return nodes;
     }
 
-    /**
+    /*
      * Keep op flattening the results object until
      * self is reached.
      */
@@ -187,7 +183,7 @@ function searchAll(values) {
         nodes = flattenParents(nodes);
     }
 
-    /**
+    /*
      * Return the matches of `self`.
      */
 
@@ -196,8 +192,9 @@ function searchAll(values) {
 
 /**
  * Define `retextSearch`.
+ *
+ * @param {Retext} retext
  */
-
 function retextSearch(retext) {
     var TextOM,
         parentPrototype,
@@ -217,7 +214,7 @@ function retextSearch(retext) {
     parentPrototype.searchAll = elementPrototype.searchAll = searchAll;
 }
 
-/**
+/*
  * Expose `retextSearch`.
  */
 

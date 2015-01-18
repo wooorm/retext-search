@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -10,7 +10,7 @@ var search,
 search = require('./');
 Retext = require('retext');
 
-/**
+/*
  * Fixtures.
  */
 
@@ -28,7 +28,7 @@ small = Array(11).join(tiny);
 medium = Array(11).join(small);
 large = Array(11).join(medium);
 
-/**
+/*
  * Retext.
  */
 
@@ -36,7 +36,7 @@ var retext;
 
 retext = new Retext().use(search);
 
-/**
+/*
  * Benchmarks.
  */
 

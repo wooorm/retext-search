@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -14,7 +14,7 @@ Retext = require('retext');
 inspect = require('retext-inspect');
 assert = require('assert');
 
-/**
+/*
  * Fixtures.
  */
 
@@ -28,7 +28,7 @@ value =
     'Mr Smith. ' +
     'Xavier likes rowing in the morning.';
 
-/**
+/*
  * Retext.
  */
 
@@ -41,7 +41,7 @@ retext = new Retext()
 
 TextOM = retext.TextOM;
 
-/**
+/*
  * Tests.
  */
 
