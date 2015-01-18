@@ -22,6 +22,12 @@ $ component install wooorm/retext-search
 $ bower install retext-search
 ```
 
+[Duo](http://duojs.org/#getting-started):
+
+```javascript
+var search = require('wooorm/retext-search');
+```
+
 ## Usage
 
 ```javascript
