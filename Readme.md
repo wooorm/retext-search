@@ -4,19 +4,19 @@ Search in a document with **[Retext](https://github.com/wooorm/retext)**.
 
 ## Installation
 
-npm:
+[npm](https://docs.npmjs.com/cli/install):
 
 ```bash
 $ npm install retext-search
 ```
 
-Component:
+[Component.js](https://github.com/componentjs/component):
 
 ```bash
 $ component install wooorm/retext-search
 ```
 
-Bower:
+[Bower](http://bower.io/#install-packages):
 
 ```bash
 $ bower install retext-search
@@ -44,7 +44,7 @@ retext.parse(
     'Xavier likes rowing in the morning.',
     function (err, tree) {
         console.log(tree.search('smit'));
-        /**
+        /*
          * [
          *   // The `WordNode` in the second sentence:
          *   WordNode[1]
